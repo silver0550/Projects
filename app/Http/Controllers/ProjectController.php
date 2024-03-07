@@ -17,29 +17,27 @@ class ProjectController extends Controller
 
     public function index(): JsonResponse
     {
-        return response()->json(ProjectResource::collection($this->projectService::getAll()), ResponseCode::HTTP_OK);
+        return response()->json(ProjectResource::collection($this->projectService->getAll()), ResponseCode::HTTP_OK);
     }
 
     public function store(ProjectRequest $request): JsonResponse
     {
-        $validated = $request->validated();
+        $created = $this->projectService->create($request->validated());
 
-        $created = $this->projectService->create($validated);
-
-        return response()->json($created, ResponseCode::HTTP_OK);
+        return response()->json(new ProjectResource($created), ResponseCode::HTTP_CREATED);
     }
 
     public function update(ProjectRequest $request, int $projectId): JsonResponse
     {
         $updated = $this->projectService->update($projectId, $request->validated());
 
-        return response()->json($updated, ResponseCode::HTTP_OK);
+        return response()->json(new ProjectResource($updated), ResponseCode::HTTP_OK);
     }
 
     public function destroy(int $projectId): JsonResponse
     {
         $this->projectService->delete($projectId);
 
-        return response()->json();
+        return response()->json(null, ResponseCode::HTTP_NO_CONTENT);
     }
 }

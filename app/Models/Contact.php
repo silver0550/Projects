@@ -2,20 +2,16 @@
 
 namespace App\Models;
 
-use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class Contact extends Model
 {
     use SoftDeletes, HasFactory;
 
     protected $guarded = ['id'];
-    protected $casts = [
-        'status' => StatusEnum::class
-    ];
 
     /*
     |--------------------------------------------------------------------------
@@ -23,9 +19,9 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function contacts(): BelongsToMany
+    public function projects(): BelongsToMany
     {
-        return $this->belongsToMany(Contact::class)->withTimestamps();
+        return $this->belongsToMany(Project::class)->withTimestamps();
     }
 
     /*
