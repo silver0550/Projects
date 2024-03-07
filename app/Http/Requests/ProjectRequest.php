@@ -16,4 +16,13 @@ class ProjectRequest extends FormRequest
             'status' => ['required', Rule::in(StatusEnum::getValues())],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('project.name'),
+            'description' => __('project.description'),
+            'status' => __('project.status'),
+        ];
+    }
 }
