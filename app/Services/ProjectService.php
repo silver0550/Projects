@@ -34,4 +34,14 @@ class ProjectService
     {
         $this->projectRepository->delete($projectId);
     }
+
+    public function getFormattedProjects(): array
+    {
+        return $this->projectRepository->getFormattedProjects();
+    }
+
+    public function getById(int $id): Project
+    {
+        return $this->projectRepository->getById($id);
+    }
 }

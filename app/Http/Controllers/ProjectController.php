@@ -6,6 +6,8 @@ use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Services\ProjectService;
 use Illuminate\Http\JsonResponse;
+use Inertia\Inertia;
+use Inertia\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseCode;
 
 class ProjectController extends Controller
@@ -13,6 +15,25 @@ class ProjectController extends Controller
 
     public function __construct(private readonly ProjectService $projectService)
     {
+    }
+
+    public function indexPage(): Response
+    {
+        return Inertia::render('Project/index', [
+            'projects' => $this->projectService->getFormattedProjects()
+        ]);
+    }
+
+    public function createPage(): Response
+    {
+        return Inertia::render('Project/create');
+    }
+
+    public function editPage(int $id): Response
+    {
+        return Inertia::render('Project/create', [
+            'project' => $this->projectService->getById($id),
+        ]);
     }
 
     public function index(): JsonResponse

@@ -16,6 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::crud('/project', ProjectController::class, 'project');
 Route::crud('/contact', ContactController::class, 'contact');

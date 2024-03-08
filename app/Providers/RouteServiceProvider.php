@@ -47,10 +47,9 @@ class RouteServiceProvider extends ServiceProvider
 
     public function defineCrud(): void
     {
-        Route::macro('crud', function ($prefix, $controller, $name = null, $middleware = null) {
+        Route::macro('crud', function ($prefix, $controller, $name = null) {
             Route::group([
                 'prefix' => $prefix,
-                'middleware' => $middleware,
                 'as' => $name,
             ], function () use ($controller) {
                 Route::get('/', [$controller, 'index'])->name('.index');
