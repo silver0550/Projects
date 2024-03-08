@@ -18,8 +18,10 @@ export default {
         },
     },
 
-    plugins: [forms],
-        [require("daisyui")],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('daisyui'),
+    ],
     daisyui:{
         themes: ["light","dark"],
     }
